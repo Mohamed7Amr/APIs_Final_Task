@@ -3,7 +3,6 @@ package tests.to_do_tests.add_todo_tests;
 import io.restassured.http.ContentType;
 import modules_POJOS.todo_POJOS.Todo_Request_POJO;
 import org.testng.annotations.Test;
-
 import static data_reader.Load_Properties.environment_Data;
 import static data_reader.Load_Properties.todo_Request_Body_Data;
 import static io.restassured.RestAssured.given;

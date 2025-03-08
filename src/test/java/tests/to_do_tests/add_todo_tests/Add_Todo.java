@@ -2,12 +2,8 @@ package tests.to_do_tests.add_todo_tests;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-//import modules_POJOS.todo_POJOS.Todo_Request_POJO;
 import modules_POJOS.todo_POJOS.Todo_Request_POJO;
 import org.testng.annotations.Test;
-
-import java.io.File;
-
 import static data_reader.Load_Properties.environment_Data;
 import static data_reader.Load_Properties.todo_Request_Body_Data;
 import static io.restassured.RestAssured.given;
@@ -38,8 +34,7 @@ public class Add_Todo {
     public void should_Be_Able_To_Add_Todo()
     {
         todo_Request_POJO = new Todo_Request_POJO( false, item);
-//        HashMap<String>
-//    File add_Todo_Body = new File("src/test/resources/Json_Files/Todo.json");
+
         Response res = given()
                 .baseUri(base_URI)
                 .log().all()
@@ -50,7 +45,6 @@ public class Add_Todo {
                 .post(to_Do_Endpoint)
                 .then()
                 .log().all()
-//                .body("isCompleted",equalTo(false))
                 .extract().response();
 
     }

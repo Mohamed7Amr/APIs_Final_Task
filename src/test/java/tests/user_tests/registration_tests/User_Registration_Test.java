@@ -8,17 +8,13 @@ import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import modules_POJOS.registration_POJOS.Registration_Request_POJO;
-import modules_POJOS.registration_POJOS.Registration_Response_POJO;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import java.io.File;
 
 public class User_Registration_Test {
 
     /************************************OBJECTS_DECLARATIONS/INSTANTIATIONS*****************************/
     private Registration_Request_POJO register_Request_POJO;
-    private Registration_Response_POJO register_Response_POJO;
-    private File user_Registration;
     private Faker fake_Data = new Faker();
 
     /********************************************TEST_DATA*********************************************/
