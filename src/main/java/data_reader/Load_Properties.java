@@ -23,5 +23,10 @@ public class Load_Properties {
             load_Properties_Data("src/test/resources/Properties/Environment_Data/EnvironmentData.properties");
     public static Properties registration_Request_Body_Data =
             load_Properties_Data("src/test/resources/Properties/Request_Bodies_Data/Registration/Registration_Request_Body_Data.properties");
+    public static Properties todo_Request_Body_Data =
+            load_Properties_Data("src/test/resources/Properties/Request_Bodies_Data/Todo/Todo_Request_Body_Data.properties");
+    public static Properties login_Request_Body_Data =
+            load_Properties_Data("src/test/resources/Properties/Request_Bodies_Data/Login/Login_Request_Body_Data.properties");
+
 
 }

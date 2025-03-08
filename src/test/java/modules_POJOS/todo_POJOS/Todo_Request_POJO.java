@@ -1,20 +1,33 @@
 package modules_POJOS.todo_POJOS;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Todo_Request_POJO {
-    private String isCompleted;
+
+
+    @JsonProperty("isCompleted")
+    private Boolean isCompleted;
     private String item;
 
-    public Todo_Request_POJO(String isCompleted, String item) {
+    public Todo_Request_POJO(Boolean isCompleted, String item) {
         this.isCompleted = isCompleted;
         this.item = item;
     }
 
-    public String getIsCompleted() {
+    public Todo_Request_POJO(String item) {
+        this.item = item;
+    }
+
+    @JsonProperty("isCompleted")
+    public Boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setIsCompleted(String isCompleted) {
-        this.isCompleted = isCompleted;
+    @JsonProperty("isCompleted")
+    public void setIsCompleted(Boolean isCompleted) {
+        isCompleted = isCompleted;
     }
 
     public String getItem() {
