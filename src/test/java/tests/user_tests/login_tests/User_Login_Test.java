@@ -1,13 +1,15 @@
 package tests.user_tests.login_tests;
 
+import APIs.user_APIs.login_APIs.Login_APIs;
 import com.github.javafaker.Faker;
-import io.restassured.http.ContentType;
+import common_steps.User_Common_Steps;
 import io.restassured.response.Response;
 import modules_POJOS.login_POJOS.Login_Request_POJO;
+import modules_POJOS.login_POJOS.Login_Response_POJO;
+import modules_POJOS.registration_POJOS.Registration_Request_POJO;
 import org.testng.annotations.Test;
 import static data_reader.Load_Properties.environment_Data;
 import static data_reader.Load_Properties.login_Request_Body_Data;
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -18,8 +20,6 @@ public class User_Login_Test {
     /********************************************TEST_DATA*********************************************/
     private final String base_URI = environment_Data.getProperty("base_URI");
     private final String user_Login_Endpoint = environment_Data.getProperty("user_Login_Endpoint");
-    private final String email = login_Request_Body_Data.getProperty("email");
-    private final String password = login_Request_Body_Data.getProperty("password");
     private final String invalid_Email = fake_Data.numerify("memo##@yahoo.com");
 
     /*********************************************DATA_SETS****************************************/
@@ -36,22 +36,17 @@ public class User_Login_Test {
     @Test
     public void should_Be_Able_To_Login()
     {
+        Registration_Request_POJO register_Request_POJO = User_Common_Steps.register_New_User();
 
-        login_Request_POJO = new Login_Request_POJO(email,password);
+        Login_Request_POJO login_Request_POJO = new Login_Request_POJO(register_Request_POJO.getEmail(),
+                register_Request_POJO.getPassword());
 
-        Response res = given()
-                .baseUri(base_URI)
-                .contentType(ContentType.JSON)
-                .body(login_Request_Body_Data)
-                .log().all()
-                .when()
-                .post(user_Login_Endpoint)
-                .then()
-                .log().all()
-                .extract().response();
+        Response res = Login_APIs.login(login_Request_POJO);
+
+        Login_Response_POJO login_Response_POJO = res.body().as(Login_Response_POJO.class);
 
         assertThat(res.statusCode(),equalTo(200));
-        assertThat(res.path("access_Token"),notNullValue());
+        assertThat(login_Response_POJO.getAccess_token(),notNullValue());
 
     }
 

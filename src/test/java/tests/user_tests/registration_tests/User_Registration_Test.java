@@ -4,10 +4,15 @@ import static data_reader.Load_Properties.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+
+import APIs.user_APIs.registration_APIs.Registration_APIs;
 import com.github.javafaker.Faker;
+import static common_steps.User_Common_Steps.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import modules_POJOS.registration_POJOS.Registration_Errors_POJO;
 import modules_POJOS.registration_POJOS.Registration_Request_POJO;
+import modules_POJOS.registration_POJOS.Registration_Response_POJO;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -25,58 +30,32 @@ public class User_Registration_Test {
     private final String email = fake_Data.numerify("memo##@yahoo.com");
     private final String password = registration_Request_Body_Data.getProperty("password");
 
-    /*********************************************DATA_SETS****************************************/
-    @DataProvider(name = "registration_Data_Set")
-    public Object[][] test_Data()
-    {
-        return new Object[][]{
-                {email},
-                {email}
-        };
-    }
-
     /**********************************************TESTS*********************************************/
 
     @Test
     public void should_Be_Able_To_Register()
     {
-        register_Request_POJO = new Registration_Request_POJO(firstName,lastName,email,password);
 
-        Response res = given()
-                .baseUri(base_URI)
-                .log().all()
-                .contentType(ContentType.JSON)
-                .body(register_Request_POJO)
-                .log().all()
-        .when()
-                .post(user_Register_Endpoint)
-        .then()
-                .log().all()
-                .extract().response();
+
+        Response res = Registration_APIs.register(generate_User_Registration_Data());
+
+        Registration_Response_POJO register_Response_POJO = res.body().as(Registration_Response_POJO.class);
 
         assertThat(res.statusCode(),equalTo(201));
-        assertThat(res.path("firstName"),equalTo("Mohamed"));
+        assertThat(register_Response_POJO.getFirstName(),equalTo(register_Request_POJO.getFirstName()));
 
     }
 
-    @Test(dataProvider = "registration_Data_Set")
+    @Test()
     public void should_Not_Be_Able_To_Register_With_Existing_Email(String email)
     {
-        register_Request_POJO = new Registration_Request_POJO(firstName,lastName,email,password);
 
-        Response res = given()
-                .baseUri(base_URI)
-                .contentType(ContentType.JSON)
-                .body(register_Request_POJO)
-                .log().all()
-                .when()
-                .post(user_Register_Endpoint)
-                .then()
-                .log().all()
-                .extract().response();
+        Response res = Registration_APIs.register(register_New_User());
+
+        Registration_Errors_POJO register_Errors_POJO = res.body().as(Registration_Errors_POJO.class);
 
         assertThat(res.statusCode(),equalTo(400));
-        assertThat(res.path("message"),equalTo("Email is already exists in the Database"));
+        assertThat(register_Errors_POJO.getMessage(),equalTo("Email is already exists in the Database"));
     }
 
 }

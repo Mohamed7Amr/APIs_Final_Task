@@ -12,6 +12,7 @@ public class Get_Todo {
 
     /*******************************************OBJECTS_DECLARATIONS/INSTANTIATIONS*****************************/
     private Todo_Request_POJO todo_Request_POJO;
+
     /********************************************TEST_DATA*********************************************/
     private final String base_URI = environment_Data.getProperty("base_URI");
     private final String to_Do_Endpoint = environment_Data.getProperty("to_Do_Endpoint");
@@ -20,8 +21,6 @@ public class Get_Todo {
     private final String message = todo_Request_Body_Data.getProperty("message");
 
     /**********************************************TESTS*********************************************/
-
-
     @Test
     public void should_Be_Able_To_Get_Todo()
     {
