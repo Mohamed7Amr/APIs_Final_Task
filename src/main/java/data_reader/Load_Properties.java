@@ -27,6 +27,8 @@ public class Load_Properties {
             load_Properties_Data("src/test/resources/Properties/Request_Bodies_Data/Todo/Todo_Request_Body_Data.properties");
     public static Properties login_Request_Body_Data =
             load_Properties_Data("src/test/resources/Properties/Request_Bodies_Data/Login/Login_Request_Body_Data.properties");
+    public static Properties registration_ErrorS_Messages_Data =
+            load_Properties_Data("src/test/resources/Properties/Errors_Messages_Data/Registration_Errors.properties");
 
 
 }

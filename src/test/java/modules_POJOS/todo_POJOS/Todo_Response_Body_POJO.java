@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * the POJO class to send
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Todo_Response_POJO {
+public class Todo_Response_Body_POJO {
     /*****************************************ATTRIBUTES****************************************/
     private String isCompleted;
     @JsonProperty("_id")
@@ -22,17 +22,6 @@ public class Todo_Response_POJO {
      */
     @JsonProperty("__v")
     private String __v;
-
-    /*****************************************CONSTRUCTORS****************************************/
-
-    public Todo_Response_POJO(String isCompleted, String _id, String item, String userID, String createdAt, String __v) {
-        this.isCompleted = isCompleted;
-        this._id = _id;
-        this.item = item;
-        this.userID = userID;
-        this.createdAt = createdAt;
-        this.__v = __v;
-    }
 
     /*****************************************SETTERS_AND_GETTERS****************************************/
 

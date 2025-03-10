@@ -1,6 +1,9 @@
 package modules_POJOS.registration_POJOS;
 
-public class Registration_Request_POJO {
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Registration_Request_Body_POJO {
     /*****************************************ATTRIBUTES****************************************/
     private String firstName;
     private String lastName;
@@ -8,7 +11,7 @@ public class Registration_Request_POJO {
     private String password;
 
     /*****************************************CONSTRUCTORS****************************************/
-    public Registration_Request_POJO(String firstName, String lastName, String email, String password) {
+    public Registration_Request_Body_POJO(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

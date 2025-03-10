@@ -1,12 +1,12 @@
 package modules_POJOS.login_POJOS;
 
-public class Login_Request_POJO {
+public class Login_Request_Body_POJO {
 
     private String email;
     private String password;
 
 
-    public Login_Request_POJO(String email, String password) {
+    public Login_Request_Body_POJO(String email, String password) {
         this.email = email;
         this.password = password;
     }
